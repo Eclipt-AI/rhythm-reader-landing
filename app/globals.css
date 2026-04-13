@@ -1,27 +1,34 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --orange: #F5761A;
-  --orange-light: #FFF5EE;
-  --gray-light: #f5f5f5;
+@theme inline {
+  --color-primary: #F5761A;
+  --color-primary-light: #FDE4D0;
+  --color-primary-dark: #C45A0F;
+  --color-dark: #1A1A2E;
+  --color-body: #4A4A68;
+  --color-muted: #9CA3AF;
+  --color-success: #22C55E;
+  --color-surface: #F8F9FC;
+  --color-background: #ffffff;
+  --color-foreground: #1A1A2E;
+
+  /* Legacy aliases kept so existing tokens still resolve */
+  --color-orange: #F5761A;
+  --color-orange-light: #FDE4D0;
+  --color-gray-light: #F8F9FC;
+
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-plus-jakarta);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-orange: var(--orange);
-  --color-orange-light: var(--orange-light);
-  --color-gray-light: var(--gray-light);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-body);
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
 /* Scrolling logos */
@@ -34,7 +41,12 @@ body {
   animation: scroll-left 30s linear infinite;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
