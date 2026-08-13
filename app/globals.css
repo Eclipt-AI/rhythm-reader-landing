@@ -31,6 +31,114 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+/* Legal document typography (Terms, Privacy, Account Deletion) */
+.legal-prose {
+  color: var(--color-body);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.legal-prose h2 {
+  font-family: var(--font-heading), var(--font-sans), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 1.375rem;
+  line-height: 1.3;
+  color: var(--color-dark);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 5rem;
+}
+
+.legal-prose h3 {
+  font-family: var(--font-heading), var(--font-sans), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.0625rem;
+  color: var(--color-dark);
+  margin-top: 2rem;
+  margin-bottom: 0.625rem;
+}
+
+.legal-prose p {
+  margin-bottom: 1.125rem;
+}
+
+.legal-prose ul,
+.legal-prose ol {
+  margin: 0 0 1.125rem 0;
+  padding-left: 1.5rem;
+}
+
+.legal-prose ul { list-style: disc; }
+.legal-prose ol { list-style: decimal; }
+
+.legal-prose li {
+  margin-bottom: 0.5rem;
+  padding-left: 0.25rem;
+}
+
+.legal-prose li::marker {
+  color: var(--color-primary);
+}
+
+.legal-prose strong {
+  color: var(--color-dark);
+  font-weight: 600;
+}
+
+.legal-prose a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-prose a:hover {
+  color: var(--color-primary-dark);
+}
+
+.legal-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  font-size: 0.9375rem;
+}
+
+.legal-prose th,
+.legal-prose td {
+  border: 1px solid #e5e7eb;
+  padding: 0.625rem 0.875rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.legal-prose th {
+  background: var(--color-surface);
+  color: var(--color-dark);
+  font-weight: 600;
+}
+
+.legal-prose .table-scroll {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.legal-prose .table-scroll table {
+  margin-bottom: 0;
+  min-width: 34rem;
+}
+
+.legal-prose .callout {
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-primary);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.legal-prose .callout p:last-child {
+  margin-bottom: 0;
+}
+
 /* Scrolling logos */
 @keyframes scroll-left {
   0% { transform: translateX(0); }

@@ -14,6 +14,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.rhythmreader.com"),
   title: "Rhythm Reader - Scan, Listen, Play",
   description:
     "Rhythm Reader scans sheet music, reads the notes, interprets the dynamics, and plays back the rhythm on your desired instrument.",
