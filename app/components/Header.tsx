@@ -10,7 +10,6 @@ export default function Header() {
     { href: "#about", label: "About" },
     { href: "#community", label: "Play" },
     { href: "#join", label: "Join" },
-    { href: "#reviews", label: "Take Note" },
     { href: "#contact", label: "Contact" },
   ];
 
@@ -46,10 +45,10 @@ export default function Header() {
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="#join"
+            href="#contact"
             className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25"
           >
-            Join
+            Contact Us
             <ArrowRight className="w-4 h-4" />
           </a>
         </div>
@@ -78,11 +77,11 @@ export default function Header() {
             </a>
           ))}
           <a
-            href="#join"
+            href="#contact"
             className="inline-flex items-center justify-center gap-2 w-full h-10 px-5 rounded-lg bg-primary text-white font-semibold shadow-lg shadow-primary/25"
             onClick={() => setMobileOpen(false)}
           >
-            Join
+            Contact Us
             <ArrowRight className="w-4 h-4" />
           </a>
         </div>

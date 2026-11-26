@@ -7,21 +7,21 @@ const steps = [
   {
     number: "01",
     icon: ScanLine,
-    title: "Scan your sheets.",
+    title: "Scan Music",
     image: "/assets/Camera-portrait.png",
     alt: "Scan sheet music",
   },
   {
     number: "02",
     icon: Sparkles,
-    title: "Wait for AI to do its magic.",
+    title: "Wait for AI's Magical Interlude",
     image: "/assets/Processing-portrait.png",
     alt: "AI processes your music",
   },
   {
     number: "03",
     icon: Play,
-    title: "Start playing.",
+    title: "Press Play",
     image: "/assets/Score-Full-Screen-Mode-portrait.png",
     alt: "Play back the rhythm",
   },
@@ -34,14 +34,13 @@ export default function HowToUse() {
         <div className="text-center max-w-3xl mx-auto">
           <AnimateOnScroll>
             <SectionBadge icon={<Zap className="w-4 h-4 text-primary" />}>
-              How to Use
+              Let&apos;s Get Started!
             </SectionBadge>
           </AnimateOnScroll>
 
           <AnimateOnScroll delay={0.1}>
             <h2 className="mt-6 text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark font-[family-name:var(--font-plus-jakarta)] tracking-tight leading-tight">
-              Getting Started with{" "}
-              <span className="text-primary">Rhythm Reader</span>
+              Ready, Set, <span className="text-primary">Go!</span>
             </h2>
           </AnimateOnScroll>
           <AnimateOnScroll delay={0.2}>

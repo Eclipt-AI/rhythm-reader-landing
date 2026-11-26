@@ -1,5 +1,8 @@
-import { ReactNode } from "react";
-import { Eye, ZoomIn, Volume2, Check, Sparkles, Plus, Minus, Music, Repeat, SkipBack, Maximize2 } from "lucide-react";
+"use client";
+
+import { ReactNode, useEffect, useState } from "react";
+import { useReducedMotion } from "motion/react";
+import { Accessibility, Eye, Volume2, Check, Sparkles, Plus, Minus, Music, Repeat, SkipBack, Maximize2 } from "lucide-react";
 import AnimateOnScroll from "./AnimateOnScroll";
 import SectionBadge from "./SectionBadge";
 
@@ -60,6 +63,18 @@ function FeatureBlock({
 
 /* ---- Visual mockups (decorative, no copy) ---- */
 
+/** Steps a playhead through `count` notes, looping. Holds still for reduced motion. */
+function usePlayhead(count: number, start: number, intervalMs = 650) {
+  const reduce = useReducedMotion();
+  const [index, setIndex] = useState(start);
+  useEffect(() => {
+    if (reduce) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % count), intervalMs);
+    return () => clearInterval(id);
+  }, [count, intervalMs, reduce]);
+  return index;
+}
+
 /**
  * HighlightVisual — mirrors the app's score screen.
  * - 5-line staff with treble clef
@@ -74,7 +89,7 @@ function HighlightVisual() {
     { x: 55, y: 4 },
     { x: 80, y: 0 },
     { x: 105, y: -4 },
-    { x: 135, y: -8, playing: true }, // currently playing
+    { x: 135, y: -8 },
     { x: 165, y: -4 },
     { x: 190, y: 0 },
     { x: 215, y: -2 },
@@ -84,7 +99,10 @@ function HighlightVisual() {
   const STAVE_TOP = 30;
   const STAVE_GAP = 7;
   const STAVE_MID = STAVE_TOP + STAVE_GAP * 2;
-  const cursorX = 135;
+  const playing = usePlayhead(notes.length, 3);
+  const cursorX = notes[playing].x;
+  const bar = playing < 3 ? 1 : playing < 6 ? 2 : 3;
+  const beat = playing < 3 ? playing + 2 : playing < 6 ? playing - 2 : playing - 5;
 
   return (
     <div className="p-5 bg-[#fef8f4]">
@@ -100,7 +118,7 @@ function HighlightVisual() {
             </span>
           </div>
           <span className="text-[10px] font-medium text-[#828282]">
-            Bar 3 · Beat 2
+            Bar {bar} · Beat {beat}
           </span>
         </div>
 
@@ -163,7 +181,7 @@ function HighlightVisual() {
           {/* Notes */}
           {notes.map((n, i) => {
             const cy = STAVE_MID + n.y;
-            const fill = n.playing ? "#F5761A" : "#111818";
+            const fill = i === playing ? "#F5761A" : "#111818";
             const stemUp = n.y >= 0;
             return (
               <g key={i}>
@@ -175,6 +193,7 @@ function HighlightVisual() {
                   ry="3"
                   fill={fill}
                   transform={`rotate(-20 ${n.x} ${cy})`}
+                  style={{ transition: "fill 150ms ease" }}
                 />
                 {/* stem */}
                 <line
@@ -190,9 +209,9 @@ function HighlightVisual() {
           })}
 
           {/* Playback cursor — vertical bar + knob (matches app) */}
-          <g>
+          <g style={{ transform: `translateX(${cursorX}px)`, transition: "transform 300ms ease-out" }}>
             <rect
-              x={cursorX - 2}
+              x={-2}
               y={STAVE_TOP - 6}
               width="4"
               height={STAVE_GAP * 4 + 12}
@@ -201,13 +220,13 @@ function HighlightVisual() {
               rx="1"
             />
             <circle
-              cx={cursorX}
+              cx={0}
               cy={STAVE_TOP + STAVE_GAP * 4 + 14}
               r="6"
               fill="#F5761A"
             />
             <circle
-              cx={cursorX}
+              cx={0}
               cy={STAVE_TOP + STAVE_GAP * 4 + 14}
               r="2.5"
               fill="white"
@@ -320,7 +339,13 @@ function AccessibilityVisual() {
  * - 5 evenly-spaced transport controls: Repeat, Previous, Play (orange circle), Cursor toggle, Fullscreen
  * - Above the toolbar: a score preview with the playback cursor for context
  */
+const PLAYBACK_XS = [60, 90, 120, 155, 185, 215, 245];
+
 function PlaybackVisual() {
+  const playingIndex = usePlayhead(PLAYBACK_XS.length, 2, 550);
+  const cursorX = PLAYBACK_XS[playingIndex];
+  const elapsed = 40 + playingIndex;
+
   return (
     <div className="p-5 bg-[#fef8f4]">
       <div className="space-y-4">
@@ -339,9 +364,9 @@ function PlaybackVisual() {
               />
             ))}
             <text x="14" y="46" fontSize="30" fill="#111818" fontFamily="serif">𝄞</text>
-            {[60, 90, 120, 155, 185, 215, 245].map((x, i) => {
+            {PLAYBACK_XS.map((x, i) => {
               const y = 32 + (i % 4) * 3;
-              const playing = i === 2;
+              const playing = i === playingIndex;
               return (
                 <g key={i}>
                   <ellipse
@@ -364,11 +389,13 @@ function PlaybackVisual() {
               );
             })}
             {/* Cursor */}
-            <rect x="118" y="12" width="4" height="40" fill="#F5761A" opacity="0.8" rx="1" />
-            <circle cx="120" cy="58" r="5" fill="#F5761A" />
+            <g style={{ transform: `translateX(${cursorX}px)`, transition: "transform 250ms ease-out" }}>
+              <rect x="-2" y="12" width="4" height="40" fill="#F5761A" opacity="0.8" rx="1" />
+              <circle cx="0" cy="58" r="5" fill="#F5761A" />
+            </g>
           </svg>
           <div className="mt-3 flex items-center justify-between text-[10px] font-medium">
-            <span className="text-[#828282]">0:42</span>
+            <span className="text-[#828282] tabular-nums">0:{elapsed}</span>
             <span className="inline-flex items-center gap-1.5 text-primary">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               Playing
@@ -405,9 +432,8 @@ export default function About() {
   const features: Omit<FeatureBlockProps, "index">[] = [
     {
       badge: "Follow Along",
-      heading: "Notes Highlighted",
-      description:
-        "Notes are highlighted as they are played so you never lose your place.",
+      heading: "Tracking",
+      description: "Watch the notes light up, and follow along in real time.",
       callouts: [
         "Real-time note tracking",
         "Bar & beat indicators",
@@ -417,10 +443,10 @@ export default function About() {
       visual: <HighlightVisual />,
     },
     {
-      badge: "Accessibility",
-      heading: "Enlarge for Accessibility",
+      badge: "Your Music, Your Way",
+      heading: "Accessibility",
       description:
-        "Notes, bars, and scores can be enlarged for optical impairments.",
+        "Scale the music to fit your needs. Increase/decrease note/font size to play your music, your way.",
       callouts: [
         "Adjustable note size",
         "High-contrast display",
@@ -432,9 +458,9 @@ export default function About() {
     },
     {
       badge: "Ear Training",
-      heading: "Playback for Ear-Trained Musicians",
+      heading: "Playback",
       description:
-        "The playback feature allows ear-trained musicians to learn and play without reading music.",
+        "Select the measures you want to play on your desired instrument and hear every line, note, and rest on pitch.",
       callouts: [
         "Instrument voicing",
         "Tempo control",
@@ -451,17 +477,20 @@ export default function About() {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <AnimateOnScroll>
             <SectionBadge icon={<Sparkles className="w-4 h-4 text-primary" />}>
-              Features
+              Your Pace, Your Rhythm
             </SectionBadge>
           </AnimateOnScroll>
           <AnimateOnScroll delay={0.1}>
             <h2 className="mt-6 text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark font-[family-name:var(--font-plus-jakarta)] tracking-tight leading-tight">
-              Your Music, <span className="text-primary">Anywhere</span>
+              Find Your Rhythm, <span className="text-primary">On The Go!</span>
             </h2>
           </AnimateOnScroll>
           <AnimateOnScroll delay={0.2}>
-            <p className="mt-5 text-body text-lg leading-relaxed">
-              Access your music on the go with efficiency and ease.
+            <p className="mt-5 text-dark text-xl font-semibold leading-relaxed">
+              Bridging the Musical Divide, One Rhythm at a Time
+            </p>
+            <p className="mt-3 text-body text-lg leading-relaxed">
+              Your part is always within reach. Store, mark up, share, &amp; learn your rhythm at your pace.
             </p>
           </AnimateOnScroll>
         </div>
@@ -469,9 +498,9 @@ export default function About() {
         {/* Intro icon cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
           {[
-            { icon: Eye, title: "Highlighted", text: "Follow the notes in real time." },
-            { icon: ZoomIn, title: "Accessible", text: "Scale the score to fit your needs." },
-            { icon: Volume2, title: "Playback", text: "Hear every line, note, and rest." },
+            { icon: Eye, title: "Tracking", text: "Watch the notes light up, and follow along in real time." },
+            { icon: Accessibility, title: "Accessibility", text: "Scale the music to fit your needs. Increase/decrease note/font size to play your music, your way." },
+            { icon: Volume2, title: "Playback", text: "Select the measures you want to play on your desired instrument and hear every line, note, and rest on pitch." },
           ].map((c, i) => {
             const Icon = c.icon;
             return (

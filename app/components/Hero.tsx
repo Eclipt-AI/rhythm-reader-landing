@@ -12,17 +12,6 @@ export default function Hero() {
 
       <div className="relative mx-auto max-w-[1200px] px-6">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 mb-6 shadow-sm"
-          >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm font-medium text-dark">Rhythm Reader</span>
-          </motion.div>
-
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -30,8 +19,8 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-dark font-[family-name:var(--font-plus-jakarta)] leading-tight tracking-tight"
           >
-            Trouble Reading{" "}
-            <span className="text-primary">Sheet Music?</span>
+            Need Help Learning{" "}
+            <span className="text-primary">the Rhythm?</span>
           </motion.h1>
 
           {/* Subheadline */}
@@ -41,7 +30,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.35 }}
             className="mt-6 text-lg md:text-xl text-body max-w-2xl leading-relaxed"
           >
-            Join Rhythm Reader to learn your score with ease!
+            Rhythm Reader plays the beat so you can practice anytime, anywhere!
           </motion.p>
 
           {/* CTAs */}

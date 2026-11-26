@@ -26,7 +26,7 @@ export default function Representation() {
         <div className="text-center max-w-3xl mx-auto">
           <AnimateOnScroll>
             <SectionBadge icon={<Award className="w-4 h-4 text-primary" />}>
-              Trusted By
+              Rhythm Readers
             </SectionBadge>
           </AnimateOnScroll>
           <AnimateOnScroll delay={0.1}>
@@ -36,7 +36,7 @@ export default function Representation() {
           </AnimateOnScroll>
           <AnimateOnScroll delay={0.2}>
             <p className="mt-5 text-body text-lg max-w-3xl mx-auto leading-relaxed">
-              Members of the Rhythm Reader Community are actively performing, training, teaching, and participating in the following musical and performing arts organizations.
+              Rhythm Readers actively perform, train, teach, and participate in the following musical and performing arts programs and organizations.
             </p>
           </AnimateOnScroll>
         </div>
@@ -72,14 +72,14 @@ export default function Representation() {
         </div>
       </AnimateOnScroll>
 
-      {/* Take Note link */}
+      {/* CTA link */}
       <AnimateOnScroll delay={0.3}>
         <div className="mt-12 text-center">
           <a
-            href="#reviews"
+            href="#join"
             className="group inline-flex items-center gap-2 text-primary font-semibold hover:text-primary-dark transition-colors"
           >
-            Take Note: Read Reviews
+            Ready to Make Music?
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </a>
         </div>

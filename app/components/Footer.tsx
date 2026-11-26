@@ -12,11 +12,10 @@ export default function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Image
-                src="/assets/app_icon.svg"
+                src="/assets/app_icon-on-dark.svg"
                 alt="Rhythm Reader"
                 width={32}
                 height={32}
-                className="invert brightness-200"
               />
               <span className="text-white font-bold text-lg font-[family-name:var(--font-plus-jakarta)]">
                 Rhythm Reader
@@ -48,7 +47,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://instagram.com/rhythymreader"
+                  href="https://www.instagram.com/rhythmreader"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 hover:text-primary transition-colors"
@@ -59,7 +58,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://tiktok.com"
+                  href="https://www.tiktok.com/@rhythmreader0"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
@@ -81,7 +80,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               <li><a href="/#join" className="hover:text-primary transition-colors">Join Community</a></li>
-              <li><a href="/#reviews" className="hover:text-primary transition-colors">Reviews</a></li>
+              <li><a href="/#reviews" className="hover:text-primary transition-colors">Rhythm Readers</a></li>
               <li>
                 <a href="mailto:hello@rhythmreader.com" className="hover:text-primary transition-colors">
                   hello@rhythmreader.com

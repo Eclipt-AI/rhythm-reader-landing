@@ -5,6 +5,8 @@ import { ScanLine, Headphones, Play, ArrowRight, Rocket } from "lucide-react";
 import AnimateOnScroll from "./AnimateOnScroll";
 import SectionBadge from "./SectionBadge";
 
+const APP_URL = "https://apps.apple.com/us/app/rhythm-reader-scan-play/id6757306525";
+
 const easySteps = [
   { step: "01", title: "Scan", icon: ScanLine },
   { step: "02", title: "Listen", icon: Headphones },
@@ -18,7 +20,7 @@ export default function Join() {
         <div className="text-center max-w-3xl mx-auto">
           <AnimateOnScroll>
             <SectionBadge icon={<Rocket className="w-4 h-4 text-primary" />}>
-              Get Started
+              Start Now
             </SectionBadge>
           </AnimateOnScroll>
           <AnimateOnScroll delay={0.1}>
@@ -28,7 +30,7 @@ export default function Join() {
           </AnimateOnScroll>
           <AnimateOnScroll delay={0.2}>
             <p className="mt-5 text-body text-lg max-w-2xl mx-auto leading-relaxed">
-              Stuck sight reading your seating audition? Don&apos;t worry, We are here to help
+              Need help nailing that seating audition? Don&apos;t worry, we&apos;ve got you!
             </p>
           </AnimateOnScroll>
         </div>
@@ -36,7 +38,7 @@ export default function Join() {
         {/* 3 Easy Steps */}
         <AnimateOnScroll delay={0.1}>
           <h3 className="mt-20 text-center text-2xl font-bold text-dark font-[family-name:var(--font-plus-jakarta)]">
-            Get that rhythm down in 3 Easy Steps
+            3 Easy Steps
           </h3>
         </AnimateOnScroll>
 
@@ -63,33 +65,17 @@ export default function Join() {
           })}
         </div>
 
-        {/* CTA buttons */}
+        {/* CTA button */}
         <AnimateOnScroll delay={0.2}>
-          <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-14 flex justify-center">
             <a
-              href="https://google.com"
+              href={APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-lg bg-primary text-white text-base font-semibold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25"
             >
-              Join Our Community
+              Join Our Musical Community
               <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
-              href="https://google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-lg bg-white text-primary text-base font-semibold border-2 border-primary hover:bg-primary hover:text-white transition-colors"
-            >
-              Concert Master
-            </a>
-            <a
-              href="https://google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 h-12 px-7 rounded-lg bg-white text-body text-base font-medium border border-gray-200 hover:border-primary/30 hover:text-primary transition-all"
-            >
-              Section Leaders
             </a>
           </div>
         </AnimateOnScroll>
@@ -100,14 +86,17 @@ export default function Join() {
             <div className="inline-flex flex-col items-center rounded-2xl bg-white border border-gray-100 p-6 shadow-lg">
               <div className="bg-white rounded-xl">
                 <QRCodeSVG
-                  value="https://google.com"
+                  value={APP_URL}
                   size={128}
                   fgColor="#F5761A"
                   level="M"
                 />
               </div>
-              <span className="mt-4 text-sm font-medium text-body">
-                Scan to Join!
+              <span className="mt-4 text-base font-bold text-dark font-[family-name:var(--font-plus-jakarta)]">
+                Ready to Make Music?
+              </span>
+              <span className="mt-1 text-sm font-medium text-body">
+                Scan to Play Along!
               </span>
             </div>
           </div>

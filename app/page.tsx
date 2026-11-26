@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import HowToUse from "./components/HowToUse";
@@ -17,9 +16,9 @@ export default function Home() {
         <Hero />
         <HowToUse />
         <About />
+        <Representation />
         <Community />
         <Join />
-        <Representation />
         <Contact />
       </main>
       <Footer />
